@@ -1,7 +1,11 @@
 .popup__close-button {
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
   grid-area: 1 / 1 / 2 / -1;
+  background-image: url(../../../images/close-button_small.svg);
+  background-color: transparent;
   z-index: 1;
   transition: opacity .3s ease-out;
 }
@@ -12,6 +16,9 @@
 
 @media screen and (min-width: 864px) {
   .popup__close-button {
+    width: 32px;
+    height: 32px;
     grid-area: 1 / 2 / 2 / 3;
+    background-image: url(../../../images/close-button.svg);
   }
 }

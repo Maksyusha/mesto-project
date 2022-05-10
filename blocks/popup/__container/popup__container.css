@@ -1,0 +1,15 @@
+.popup__container {
+  display: grid;
+  grid-template-columns: repeat(1, fit-content(1px));
+  grid-template-rows: repeat(2, fit-content(1px));
+  justify-content: center;
+  justify-items: end;
+  gap: 16px;
+}
+
+@media screen and (min-width: 864px) {
+  .popup__container {
+    grid-template-columns: repeat(2, fit-content(1px));
+    gap: 8px;
+  }
+}

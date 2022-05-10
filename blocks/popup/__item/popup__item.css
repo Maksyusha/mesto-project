@@ -1,6 +1,5 @@
-.popup__item_el_text {
-  height: 27px;
-  padding: 0;
+.popup__item {
+  padding: 0 0 13px 0;
   margin: 0 0 30px;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -9,15 +8,15 @@
   line-height: 17px;
 }
 
-.popup__item_el_text::placeholder {
+.popup__item::placeholder {
   color: #000;
 }
 
-.popup__item_el_text:last-child {
+.popup__item:last-child {
   margin: 0;
 }
 
-.popup__item_el_text:focus {
+.popup__item:focus {
   outline: transparent;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
