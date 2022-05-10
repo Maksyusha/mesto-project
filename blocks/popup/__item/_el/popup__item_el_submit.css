@@ -1,0 +1,27 @@
+.popup__item_el_submit {
+  width: 100%;
+  height: 46px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: #000;
+  border-radius: 2px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #fff;
+  transition: opacity .4s ease-out;
+}
+
+.popup__item_el_submit:hover {
+  opacity: .8;
+}
+
+@media screen and (min-width: 864px) {
+  .popup__item_el_submit {
+    height: 50px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

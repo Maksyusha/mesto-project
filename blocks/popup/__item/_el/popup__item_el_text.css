@@ -1,0 +1,23 @@
+.popup__item_el_text {
+  height: 27px;
+  padding: 0;
+  margin: 0 0 30px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.popup__item_el_text::placeholder {
+  color: #000;
+}
+
+.popup__item_el_text:last-child {
+  margin: 0;
+}
+
+.popup__item_el_text:focus {
+  outline: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}

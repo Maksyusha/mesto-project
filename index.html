@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <section class="popup popup_opened">
+    <img src="./images/close-button.svg" alt="Кнопка закрытия редактора профиля" class="popup__close-button">
+    <form class="popup__form">
+      <h1 class="popup__heading">Редактировать профиль</h1>
+      <fieldset class="popup__text">
+        <input type="text" id="name" placeholder= "Жак-Ив Кусто" class="popup__item popup__item_el_text">
+        <input type="text" id="about" placeholder="Исследователь океана" class="popup__item popup__item_el_text">
+      </fieldset>
+      <fieldset class="popup__submit">
+        <label for="save" class="popup__label">
+          <input type="submit" id="save" value="Сохранить" class="popup__item popup__item_el_submit">
+        </label>
+      </fieldset>
+    </form>
+  </section>
+  <header class="header">
+    <img src="./images/logo.svg" alt="Лого" class="header__logo">
+  </header>
+  <section class="profile">
+    <div class="profile__content">
+      <img src="./images/kusto.jpg" alt="Ваше фото профиля" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто<img src="./images/edit-button.svg" alt="Кнопка редактирования профиля" class="edit-button"></h1>
+        <p class="profile__about">Исследователь океана</p>
+      </div>
+    </div>
+    <div class="add-button"></div>
+  </section>
+  <section class="elements">
+    <div class="element">
+      <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
+      <div class="element__content">
+        <h2 class="element__title">Карачаевск</h2>
+        <fieldset class="like-button">
+          <label for="like_1" class="like-button__label">
+            <input type="checkbox" id="like_1" class="like-button__item">
+            <span class="like-button__pseudo-item"></span>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="element">
+      <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
+      <div class="element__content">
+        <h2 class="element__title">Гора Эльбрус</h2>
+        <fieldset class="like-button">
+          <label for="like_2" class="like-button__label">
+            <input type="checkbox" id="like_2" class="like-button__item">
+            <span class="like-button__pseudo-item"></span>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="element">
+      <img src="./images/dombay.jpg" alt="Домбай" class="element__image">
+      <div class="element__content">
+        <h2 class="element__title">Домбай</h2>
+        <fieldset class="like-button">
+          <label for="like_3" class="like-button__label">
+            <input type="checkbox" id="like_3" class="like-button__item">
+            <span class="like-button__pseudo-item"></span>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="element">
+      <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="element__image">
+      <div class="element__content">
+        <h2 class="element__title">Гора Эльбрус</h2>
+        <fieldset class="like-button">
+          <label for="like_4" class="like-button__label">
+            <input type="checkbox" id="like_4" class="like-button__item">
+            <span class="like-button__pseudo-item"></span>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="element">
+      <img src="./images/dombay.jpg" alt="Домбай" class="element__image">
+      <div class="element__content">
+        <h2 class="element__title">Домбай</h2>
+        <fieldset class="like-button">
+          <label for="like_5" class="like-button__label">
+            <input type="checkbox" id="like_5" class="like-button__item">
+            <span class="like-button__pseudo-item"></span>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="element">
+      <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="element__image">
+      <div class="element__content">
+        <h2 class="element__title">Карачаево-Черкесия</h2>
+        <fieldset class="like-button">
+          <label for="like_6" class="like-button__label">
+            <input type="checkbox" id="like_6" class="like-button__item">
+            <span class="like-button__pseudo-item"></span>
+          </label>
+        </fieldset>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+</body>
+</html>

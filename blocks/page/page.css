@@ -1,0 +1,38 @@
+.page {
+  display: grid;
+  grid-template-areas:
+  'header'
+  'profile'
+  'elements'
+  'footer';
+  grid-template-columns: 282px;
+  grid-template-rows: repeat(4, fit-content(18px));
+  justify-content: center;
+  background-color: #000;
+  font-family: 'Inter';
+  color: #fff;
+}
+
+@media screen and (min-width: 576px) {
+  .page {
+    grid-template-areas:
+    'header header'
+    'profile profile'
+    'elements elements'
+    'footer footer';
+    grid-template-columns: repeat(2, fit-content(282px));
+    grid-template-rows: repeat(4, fit-content(18px));
+  }
+}
+
+@media screen and (min-width: 864px) {
+  .page {
+    grid-template-areas:
+    'header header header'
+    'profile profile profile'
+    'elements elements elements'
+    'footer footer footer';
+    grid-template-columns: repeat(3, fit-content(282px));
+    grid-template-rows: repeat(4, fit-content(18px));
+  }
+}

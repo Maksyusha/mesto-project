@@ -1,0 +1,13 @@
+.popup__text {
+  padding: 0;
+  margin: 75px 0 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 864px) {
+  .popup__text {
+    margin: 54px 0 0;
+  }
+}
