@@ -7,4 +7,4 @@
 -flex и grid позиционировани
 -popup с двумя текстовыми полями и кнопкой сохранения
 
-Ссылка на git pages: https://maksyusha.github.io/russian-travel/
+Ссылка на GitHub Pages: https://maksyusha.github.io/mesto-project/
