@@ -14,6 +14,6 @@
   opacity: .5;
 }
 
-.element__like-button:checked {
+.element__like-button:focus {
   background-image: url(../../../images/like_black.svg);
 }
