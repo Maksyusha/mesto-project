@@ -1,6 +1,7 @@
 .elements {
-  padding-top: 36px;
+  padding: 16px 10px 24px;
   margin: 0 auto;
+  box-sizing: border-box;
   grid-area: elements;
   display: grid;
   grid-template-columns: 282px;
@@ -9,15 +10,16 @@
   gap: 20px
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 600px) {
   .elements {
     grid-template-columns: repeat(2, 282px);
     gap: 20px 17px;
   }
 }
 
-@media screen and (min-width: 864px) {
+@media screen and (min-width: 900px) {
   .elements {
+    padding: 25px 10px 33px;
     grid-template-columns: repeat(3, 282px);
   }
 }

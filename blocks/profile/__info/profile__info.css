@@ -1,9 +1,9 @@
 .profile__info {
-  margin-top: 26px;
+  margin-top: 22px;
   text-align: center;
 }
 
-@media screen and (min-width: 864px) {
+@media screen and (min-width: 900px) {
   .profile__info {
     margin: 0 0 0 30px;
     text-align: left;

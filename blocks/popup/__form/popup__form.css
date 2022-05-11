@@ -7,10 +7,9 @@
   background-color: #fff;
   box-sizing: border-box;
   border-radius: 10px;
-  z-index: 1;
 }
 
-@media screen and (min-width: 864px) {
+@media screen and (min-width: 900px) {
   .popup__form {
     width: 430px;
     padding: 34px 36px 37px;

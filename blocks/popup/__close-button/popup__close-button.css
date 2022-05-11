@@ -6,7 +6,7 @@
   grid-area: 1 / 1 / 2 / -1;
   background-image: url(../../../images/close-button_small.svg);
   background-color: transparent;
-  z-index: 1;
+  cursor: pointer;
   transition: opacity .3s ease-out;
 }
 
@@ -14,7 +14,7 @@
   opacity: .6;
 }
 
-@media screen and (min-width: 864px) {
+@media screen and (min-width: 900px) {
   .popup__close-button {
     width: 32px;
     height: 32px;

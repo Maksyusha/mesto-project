@@ -1,10 +1,11 @@
 .page {
+  margin: 0 auto;
   display: grid;
   grid-template-areas:
   'header'
   'main'
   'footer';
-  grid-template-columns: 282px;
+  grid-template-columns: 320px;
   grid-template-rows: repeat(4, fit-content(18px));
   justify-content: center;
   background-color: #000;
@@ -12,7 +13,7 @@
   color: #fff;
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 600px) {
   .page {
     grid-template-areas:
     'header header'
@@ -23,7 +24,7 @@
   }
 }
 
-@media screen and (min-width: 864px) {
+@media screen and (min-width: 900px) {
   .page {
     grid-template-areas:
     'header header header'
