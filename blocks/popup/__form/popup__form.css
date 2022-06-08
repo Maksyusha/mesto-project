@@ -13,7 +13,6 @@
   .popup__form {
     width: 430px;
     padding: 34px 36px 37px;
-    margin-left: 40px;
     grid-area: 2 / 1 / -1 / 2;
   }
 }

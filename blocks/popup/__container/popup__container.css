@@ -8,6 +8,12 @@
   gap: 16px;
 }
 
+@media screen and (min-width: 640px) {
+  .popup__container {
+    margin-left: 40px;
+  }
+}
+
 @media screen and (min-width: 940px) {
   .popup__container {
     grid-template-columns: repeat(2, fit-content(1px));
