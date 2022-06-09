@@ -1,4 +1,4 @@
-const elementContainer = document.querySelector('.elements');
+const elementsContainer = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.element-template').content;
 
 
@@ -26,32 +26,63 @@ function createElement(title, link) {
 
   elementDeleteButton.addEventListener('click', () => deleteElement(element));
 
-  elementImage.addEventListener('click', () => showPopupImage(elementImage, elementTitle));
+  elementImage.addEventListener('click', () => showImagePopup(elementImage, elementTitle));
 
   return element;
 }
 
 function renderElement(title, link) {
-  elementContainer.prepend(createElement(title, link));
+  elementsContainer.prepend(createElement(title, link));
 }
 
 elements.forEach(item => renderElement(item.title, item.link));
 
 
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
 
-profileName.textContent = 'Жак-Ив Кусто';
-profileAbout.textContent= 'Исследователь океана';
+const userName = document.querySelector('.profile__name');
+const userAbout = document.querySelector('.profile__about');
 
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-const popupForm = document.querySelector('.popup_type_form');
-const popupHeading = popupForm.querySelector('.popup__heading');
-const inputName = document.querySelector('.popup__item_el_name');
-const inputAbout = document.querySelector('.popup__item_el_about');
-const closeButton = popupForm.querySelector('.popup__close-button');
-const submitButton = popupForm.querySelector('.popup__submit-button');
+userName.textContent = 'Жак-Ив Кусто';
+userAbout.textContent= 'Исследователь океана';
+
+
+
+const buttonEdit = document.querySelector('.profile__edit-button');
+const buttonAdd = document.querySelector('.profile__add-button');
+
+buttonEdit.addEventListener('click', () => openPopup(profilePopup));
+buttonAdd.addEventListener('click', () => openPopup(cardPopup));
+
+
+
+const profilePopup = document.querySelector('.popup_type_profile');
+const profileName = profilePopup.querySelector('.popup__item_el_name');
+const profileAbout = profilePopup.querySelector('.popup__item_el_about');
+const profileButtonClose = profilePopup.querySelector('.popup__close-button');
+const profileButtonSubmit = profilePopup.querySelector('.popup__submit-button');
+
+profileButtonClose.addEventListener('click', () => closePopup(profilePopup, profileName, profileAbout));
+profileButtonSubmit.addEventListener('click', submitProfilePopup)
+
+
+
+const cardPopup = document.querySelector('.popup_type_card');
+const cardTitle = cardPopup.querySelector('.popup__item_el_title');
+const cardLink = cardPopup.querySelector('.popup__item_el_link');
+const cardButtonClose = cardPopup.querySelector('.popup__close-button');
+const cardButtonSubmit = cardPopup.querySelector('.popup__submit-button');
+
+cardButtonClose.addEventListener('click', () => closePopup(cardPopup, cardTitle, cardLink));
+cardButtonSubmit.addEventListener('click', submitCardPopup)
+
+
+
+const imagePopup = document.querySelector('.popup_type_image');
+const imagePicture = imagePopup.querySelector('.popup__image');
+const imageFigcaption = imagePopup.querySelector('.popup__figcaption');
+const imagebuttonClose = imagePopup.querySelector('.popup__close-button');
+
+imagebuttonClose.addEventListener('click', () => closePopup(imagePopup));
 
 
 
@@ -59,83 +90,38 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function unsavePopup() {
-  inputName.value = '';
-  inputAbout.value = '';
+function unsavePopup(name, about) {
+  name.value = '';
+  about.value = '';
 }
 
-function closePopup(popup) {
+function closePopup(popup, name, about) {
   popup.classList.remove('popup_opened');
 
-  unsavePopup();
+  unsavePopup(name, about);
 }
 
-function setPopupPlaceholders(evtName) {
-  switch (evtName) {
-    case 'edit-button':
-      popupHeading.textContent = 'Редактировать профиль';
-
-      inputName.placeholder = profileName.textContent;
-      inputAbout.placeholder = profileAbout.textContent;
-      break;
-
-    case 'add-button':
-      popupHeading.textContent = 'Новое место';
-
-      inputName.placeholder = 'Название';
-      inputAbout.placeholder = 'Ссылка на картинку';
-      break;
-  }
-}
-
-function submitPopup(evt) {
+function submitProfilePopup(evt) {
   evt.preventDefault();
 
-  switch (evtName) {
-    case 'edit-button':
-      profileName.textContent = inputName.value;
-      profileAbout.textContent = inputAbout.value;
-      break;
+  userName.textContent = profileName.value;
+  userAbout.textContent = profileAbout.value;
 
-    case 'add-button':
-      addElement(inputName.value, inputAbout.value);
-      break;
-  }
-
-  closePopup(popupForm);
+  closePopup(profilePopup, profileName, profileAbout);
 }
 
-function showPopup(evt) {
-  evtName = evt.target.name;
+function submitCardPopup(evt) {
+  evt.preventDefault();
 
-  setPopupPlaceholders(evtName);
+  renderElement(cardTitle.value, cardLink.value);
 
-  closeButton.addEventListener('click', () => closePopup(popupForm));
-
-  submitButton.addEventListener('click', submitPopup);
-
-  openPopup(popupForm);
+  closePopup(cardPopup, cardTitle, cardLink);
 }
 
+function showImagePopup(image, title) {
+  imagePicture.src = image.src;
+  imagePicture.alt = title.textContent;
+  imageFigcaption.textContent = title.textContent;
 
-
-editButton.addEventListener('click', showPopup);
-addButton.addEventListener('click', showPopup);
-
-
-
-const popupImage = document.querySelector('.popup_type_image');
-const popupPicture = document.querySelector('.popup__image');
-const popupFigcaption = document.querySelector('.popup__figcaption');
-const imageCloseButton = popupImage.querySelector('.popup__close-button');
-
-
-
-function showPopupImage(image, title) {
-  popupPicture.src = image.src;
-  popupFigcaption.textContent = title.textContent;
-
-  imageCloseButton.addEventListener('click', () => closePopup(popupImage));
-
-  openPopup(popupImage);
+  openPopup(imagePopup);
 }
