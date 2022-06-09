@@ -9,7 +9,7 @@
 -popup для добавления картинки
 -popup открытия картинки на полный экран
 
-Скрипт добавления карточек находится по пути ./blocks/element/element.js
-Скрипт попапа находится по пути ./block/popup/popup.js
+Массив данных с карточками находится по пути ./blocks/elements/elements.js
+Основной скрипт находится по пути ./script/index.js
 
 Ссылка на GitHub Pages: https://maksyusha.github.io/mesto-project/
