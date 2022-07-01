@@ -4,10 +4,10 @@ import {
   profilePopup,
   profileName,
   profileAbout,
-  cardForm,
   cardPopup,
   cardTitle,
   cardLink,
+  cardButtonSubmit,
   imagePopup,
   imagePicture,
   imageFigcaption
@@ -41,10 +41,6 @@ function setFormValue(popup) {
   openPopup(popup);
 }
 
-function resetForm(form) {
-  form.reset();
-}
-
 function submitProfilePopup(evt) {
   evt.preventDefault();
 
@@ -59,7 +55,10 @@ function submitCardPopup(evt) {
 
   closePopup(cardPopup);
 
-  resetForm(cardForm);
+  evt.target.reset();
+
+  cardButtonSubmit.setAttribute('disabled', true);
+  cardButtonSubmit.classList.add('popup__submit-button_inactive');
 
   evt.preventDefault();
 }
@@ -72,12 +71,6 @@ function showImagePopup(link, title) {
   openPopup(imagePopup);
 }
 
-function handlerOverlayClose(evt, popup) {
-  if ((evt.target.classList.contains('popup_type_overlay')) || evt.target.classList.contains('popup__container')) {
-    closePopup(popup);
-  }
-}
-
 
 
 export {
@@ -86,6 +79,5 @@ export {
   openPopup,
   closePopup,
   submitProfilePopup,
-  submitCardPopup,
-  handlerOverlayClose
+  submitCardPopup
 };
