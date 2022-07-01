@@ -1,4 +1,4 @@
-.popup__text {
+.popup__set {
   padding: 0;
   margin: 75px 0 0;
   border: 0;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (min-width: 940px) {
-  .popup__text {
+  .popup__set {
     margin: 54px 0 0;
   }
 }

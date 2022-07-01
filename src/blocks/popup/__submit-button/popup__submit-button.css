@@ -3,7 +3,7 @@
   height: 46px;
   padding: 0;
   margin: 45px 0 0;
-  border: 0;
+  border: 1px solid #000;
   background-color: #000;
   border-radius: 2px;
   font-weight: 400;
@@ -15,8 +15,14 @@
   transition: opacity .4s ease-out;
 }
 
-.popup__submit-button:hover {
+.popup__submit-button:enabled:hover {
   opacity: .8;
+}
+
+.popup__submit-button_inactive {
+  opacity: 0.2;
+  background-color: #fff;
+  color: #000;
 }
 
 @media screen and (min-width: 940px) {
