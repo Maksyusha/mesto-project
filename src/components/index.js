@@ -10,12 +10,8 @@ import {
   profileForm,
   profileName,
   profileAbout,
-  profileButtonClose,
   cardPopup,
   cardForm,
-  cardButtonClose,
-  imagePopup,
-  imageButtonClose,
   popupList,
 } from './utils.js';
 
@@ -26,15 +22,16 @@ import {
   openPopup,
   closePopup,
   submitProfilePopup,
-  submitCardPopup,
-  handlerOverlayClose
+  submitCardPopup
 } from './modal.js';
 
 import {enableValidation} from './validate.js';
 
+import {selectors} from './utils.js';
 
 
-enableValidation();
+
+enableValidation(selectors);
 
 userName.textContent = 'Жак-Ив Кусто';
 userAbout.textContent= 'Исследователь океана';
@@ -47,15 +44,20 @@ elements.forEach(item => renderElement(item.title, item.link));
 buttonEdit.addEventListener('click', () => setFormValue(profilePopup));
 buttonAdd.addEventListener('click', () => openPopup(cardPopup));
 
-profileButtonClose.addEventListener('click', () => closePopup(profilePopup));
 profileForm.addEventListener('submit', submitProfilePopup);
 
-cardButtonClose.addEventListener('click', () => closePopup(cardPopup));
 cardForm.addEventListener('submit', submitCardPopup);
 
-imageButtonClose.addEventListener('click', () => closePopup(imagePopup));
+popupList.forEach((popup) => {
 
-popupList.forEach(popup => {
-  popup.addEventListener('click', (evt) => handlerOverlayClose(evt, popup));
+  popup.addEventListener('mousedown', (evt) => {
+
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__container')) {
+      closePopup(popup)
+    }
+
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup)
+    }
+  });
 });
-
