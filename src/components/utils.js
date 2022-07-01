@@ -38,23 +38,28 @@ const profilePopup = document.querySelector('.popup_type_profile');
 const profileForm = profilePopup.querySelector('.popup__form');
 const profileName = profilePopup.querySelector('.popup__item_el_name');
 const profileAbout = profilePopup.querySelector('.popup__item_el_about');
-
-const profileButtonClose = profilePopup.querySelector('.popup__close-button');
 const profileButtonSubmit = profilePopup.querySelector('.popup__submit-button');
 
 const cardPopup = document.querySelector('.popup_type_card');
 const cardForm = cardPopup.querySelector('.popup__form');
 const cardTitle = cardPopup.querySelector('.popup__item_el_title');
 const cardLink = cardPopup.querySelector('.popup__item_el_link');
-const cardButtonClose = cardPopup.querySelector('.popup__close-button');
 const cardButtonSubmit = cardPopup.querySelector('.popup__submit-button');
 
 const imagePopup = document.querySelector('.popup_type_image');
 const imagePicture = imagePopup.querySelector('.popup__image');
 const imageFigcaption = imagePopup.querySelector('.popup__figcaption');
-const imageButtonClose = imagePopup.querySelector('.popup__close-button');
 
 const popupList = Array.from(document.querySelectorAll('.popup'));
+
+const selectors = {
+  form: 'popup__form',
+  submitButton: 'popup__submit-button',
+  submitButtonInactive: 'popup__submit-button_inactive',
+  input: 'popup__item',
+  inputError: 'popup__item_type_error',
+}
+
 
 
 
@@ -70,17 +75,15 @@ export {
   profileForm,
   profileName,
   profileAbout,
-  profileButtonClose,
   profileButtonSubmit,
   cardPopup,
   cardForm,
   cardTitle,
   cardLink,
-  cardButtonClose,
   cardButtonSubmit,
   imagePopup,
   imagePicture,
   imageFigcaption,
-  imageButtonClose,
   popupList,
+  selectors
 };
