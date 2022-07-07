@@ -64,7 +64,7 @@ Promise.all([getCardsData(), getUserData()])
   .then(([cardsData, userData]) => {
     renderProfile(userData);
 
-    let userId = userData._id;
+    const userId = userData._id;
 
     cardsData.forEach((cardData) => renderElement(cardData, userId));
   })
