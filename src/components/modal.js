@@ -1,6 +1,7 @@
 import {
-  userName,
-  userAbout,
+  avatarPopup,
+  avatarInput,
+  avatarButtonSubmit,
   profilePopup,
   profileName,
   profileAbout,
@@ -10,10 +11,15 @@ import {
   cardButtonSubmit,
   imagePopup,
   imagePicture,
-  imageFigcaption
+  imageFigcaption,
+  profileButtonSubmit
 } from './utils.js';
 
 import {renderElement} from './card.js';
+
+import {renderProfile} from './profile.js'
+
+import {addCard, editUserData, editUserAvatar} from './api.js';
 
 function handlerEscClose(evt) {
   if (evt.key === 'Escape') {
@@ -33,25 +39,50 @@ function closePopup(popup) {
   document.removeEventListener('keyup', handlerEscClose);
 }
 
-
-function setFormValue(popup) {
-  profileName.textContent = userName.textContent;
-  profileAbout.textContent = userAbout.textContent;
-
-  openPopup(popup);
+function setFormValue(userData) {
+  profileName.value = userData.name;
+  profileAbout.value = userData.about;
 }
 
-function submitProfilePopup(evt) {
-  evt.preventDefault();
+function renderLoading(isLoading, button) {
+  if (isLoading) {
+    button.textContent = 'Сохранение...';
+  } else {
+    button.textContent = 'Сохраненить';
+  }
+}
 
-  userName.textContent = profileName.value;
-  userAbout.textContent = profileAbout.value;
+function submitAvatarProfile(evt) {
+  renderLoading(true, avatarButtonSubmit)
+
+  editUserAvatar({avatar: avatarInput.value})
+  .then((userData) => renderProfile(userData))
+  .catch((err) => console.log(err))
+  .finally(() => renderLoading(false, avatarButtonSubmit));
+
+  evt.target.reset()
+
+  closePopup(avatarPopup);
+}
+
+function submitProfilePopup() {
+  renderLoading(true, profileButtonSubmit)
+
+  editUserData({name: profileName.value, about: profileAbout.value})
+  .then((userData) => renderProfile(userData))
+  .catch((err) => console.log(err))
+  .finally(() => renderLoading(false, profileButtonSubmit));
 
   closePopup(profilePopup);
 }
 
 function submitCardPopup(evt) {
-  renderElement(cardTitle.value, cardLink.value);
+  renderLoading(true, cardButtonSubmit)
+
+  addCard({name: cardTitle.value, link: cardLink.value})
+  .then((cardData) => renderElement(cardData))
+  .catch((err) => console.log(err))
+  .finally(() => renderLoading(false, cardButtonSubmit));
 
   closePopup(cardPopup);
 
@@ -59,12 +90,13 @@ function submitCardPopup(evt) {
 
   cardButtonSubmit.setAttribute('disabled', true);
   cardButtonSubmit.classList.add('popup__submit-button_inactive');
-
-  evt.preventDefault();
 }
 
-function showImagePopup(link, title) {
-  imagePicture.src = link;
+function showImagePopup(evt) {
+  imagePicture.src = evt.target.closest('.element').querySelector('.element__image').src;
+
+  const title = evt.target.closest('.element').querySelector('.element__title').textContent;
+
   imagePicture.alt = title;
   imageFigcaption.textContent = title;
 
@@ -78,6 +110,7 @@ export {
   setFormValue,
   openPopup,
   closePopup,
+  submitAvatarProfile,
   submitProfilePopup,
   submitCardPopup
 };

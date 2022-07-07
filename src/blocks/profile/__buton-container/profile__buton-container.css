@@ -1,4 +1,5 @@
 .profile__buton-container {
+  position: relative;
   display: flex;
   align-items: center;
 }

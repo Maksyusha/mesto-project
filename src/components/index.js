@@ -1,51 +1,47 @@
 import '../pages/index.css';
 
 import {
-  elements,
-  userName,
-  userAbout,
   buttonEdit,
   buttonAdd,
+  avatarEditButton,
+  avatarPopup,
+  avatarForm,
   profilePopup,
   profileForm,
-  profileName,
-  profileAbout,
   cardPopup,
   cardForm,
   popupList,
+  selectors
 } from './utils.js';
 
 import {renderElement} from './card.js';
 
 import {
-  setFormValue,
   openPopup,
   closePopup,
+  submitAvatarProfile,
   submitProfilePopup,
-  submitCardPopup
+  submitCardPopup,
 } from './modal.js';
 
 import {enableValidation} from './validate.js';
 
-import {selectors} from './utils.js';
+import {renderProfile} from './profile.js';
+
+import {getUserData, getCardsData} from './api.js';
 
 
 
 enableValidation(selectors);
 
-userName.textContent = 'Жак-Ив Кусто';
-userAbout.textContent= 'Исследователь океана';
 
-profileName.value = userName.textContent;
-profileAbout.value = userAbout.textContent;
 
-elements.forEach(item => renderElement(item.title, item.link));
-
-buttonEdit.addEventListener('click', () => setFormValue(profilePopup));
+avatarEditButton.addEventListener('click', () => openPopup(avatarPopup))
+buttonEdit.addEventListener('click', () => openPopup(profilePopup));
 buttonAdd.addEventListener('click', () => openPopup(cardPopup));
 
+avatarForm.addEventListener('submit', submitAvatarProfile);
 profileForm.addEventListener('submit', submitProfilePopup);
-
 cardForm.addEventListener('submit', submitCardPopup);
 
 popupList.forEach((popup) => {
@@ -61,3 +57,13 @@ popupList.forEach((popup) => {
     }
   });
 });
+
+
+
+getUserData()
+  .then((userData) => renderProfile(userData))
+  .catch((err) => console.log(err));
+
+getCardsData()
+  .then((cardsData) => cardsData.forEach((cardData) => renderElement(cardData)))
+  .catch((err) => console.log(err));
