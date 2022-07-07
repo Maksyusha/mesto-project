@@ -60,10 +60,12 @@ popupList.forEach((popup) => {
 
 
 
-getUserData()
-  .then((userData) => renderProfile(userData))
-  .catch((err) => console.log(err));
+Promise.all([getCardsData(), getUserData()])
+  .then(([cardsData, userData]) => {
+    renderProfile(userData);
 
-getCardsData()
-  .then((cardsData) => cardsData.forEach((cardData) => renderElement(cardData)))
+    let userId = userData._id;
+
+    cardsData.forEach((cardData) => renderElement(cardData, userId));
+  })
   .catch((err) => console.log(err));

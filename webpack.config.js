@@ -4,9 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  experiments: {
-    topLevelAwait: true
-  },
   entry: {
     main: './src/components/index.js'
   },

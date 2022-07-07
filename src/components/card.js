@@ -1,12 +1,8 @@
 import {elementsContainer, elementTemplate} from './utils.js';
 
-import {getUserData, removeCard, addLike, removeLike} from './api.js';
+import {removeCard, addLike, removeLike} from './api.js';
 
 import {showImagePopup} from './modal.js';
-
-
-
-const userId = await getUserData().then((userData) => userData._id).catch((err) => console.log(err));
 
 
 
@@ -29,7 +25,7 @@ function handleLikeElement(likeButton, cardData, counter) {
 }
 
 function checkOwner(cardData, userId) {
-  if (cardData.owner._id == userId) {
+  if (cardData.owner._id === userId) {
     return true;
   } else {
     return false
@@ -67,7 +63,7 @@ function checkUserLikes(cardData, userId, counter, likeButton) {
   }
 }
 
-function createElement(cardData) {
+function createElement(cardData, userId) {
   const element = elementTemplate.querySelector('.element').cloneNode(true);
   const elementTitle = element.querySelector('.element__title');
   const elementImage = element.querySelector('.element__image');
@@ -86,8 +82,8 @@ function createElement(cardData) {
   return element;
 }
 
-function renderElement(cardData) {
-  elementsContainer.prepend(createElement(cardData));
+function renderElement(cardData, userId) {
+  elementsContainer.prepend(createElement(cardData, userId));
 }
 
 

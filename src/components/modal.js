@@ -57,12 +57,10 @@ function submitAvatarProfile(evt) {
 
   editUserAvatar({avatar: avatarInput.value})
   .then((userData) => renderProfile(userData))
+  .then(closePopup(avatarPopup))
+  .then(evt.target.reset())
   .catch((err) => console.log(err))
   .finally(() => renderLoading(false, avatarButtonSubmit));
-
-  evt.target.reset()
-
-  closePopup(avatarPopup);
 }
 
 function submitProfilePopup() {
@@ -70,23 +68,20 @@ function submitProfilePopup() {
 
   editUserData({name: profileName.value, about: profileAbout.value})
   .then((userData) => renderProfile(userData))
+  .then(closePopup(profilePopup))
   .catch((err) => console.log(err))
   .finally(() => renderLoading(false, profileButtonSubmit));
-
-  closePopup(profilePopup);
 }
 
 function submitCardPopup(evt) {
   renderLoading(true, cardButtonSubmit)
 
   addCard({name: cardTitle.value, link: cardLink.value})
-  .then((cardData) => renderElement(cardData))
+  .then((cardData) => renderElement(cardData, cardData.owner._id))
+  .then(evt.target.reset())
+  .then(closePopup(cardPopup))
   .catch((err) => console.log(err))
   .finally(() => renderLoading(false, cardButtonSubmit));
-
-  closePopup(cardPopup);
-
-  evt.target.reset();
 
   cardButtonSubmit.setAttribute('disabled', true);
   cardButtonSubmit.classList.add('popup__submit-button_inactive');
