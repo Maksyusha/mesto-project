@@ -78,8 +78,8 @@ function submitCardPopup(evt) {
 
   addCard({name: cardTitle.value, link: cardLink.value})
   .then((cardData) => renderElement(cardData, cardData.owner._id))
-  .then(evt.target.reset())
   .then(closePopup(cardPopup))
+  .then(evt.target.reset())
   .catch((err) => console.log(err))
   .finally(() => renderLoading(false, cardButtonSubmit));
 

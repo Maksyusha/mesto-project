@@ -28,15 +28,14 @@ function checkOwner(cardData, userId) {
   if (cardData.owner._id === userId) {
     return true;
   } else {
-    return false
+    return false;
   };
 }
 
 function deleteElement(cardData, element) {
   removeCard(cardData._id)
+  .then(element.remove())
   .catch((err) => console.log(err));
-
-  element.remove();
 }
 
 function setElementListeners(element, cardData, userId, likeButton, counter, deleteButton, image) {
@@ -52,7 +51,7 @@ function setElementListeners(element, cardData, userId, likeButton, counter, del
 }
 
 function checkUserLikes(cardData, userId, counter, likeButton) {
-  const likes = cardData.likes
+  const likes = cardData.likes;
 
   if (likes.length !== 0) {
     counter.textContent = cardData.likes.length;
@@ -73,7 +72,7 @@ function createElement(cardData, userId) {
 
   checkUserLikes(cardData, userId, elementLikeCounter, elementLikeButton);
 
-  setElementListeners(element, cardData, userId, elementLikeButton, elementLikeCounter, elementDeleteButton, elementImage)
+  setElementListeners(element, cardData, userId, elementLikeButton, elementLikeCounter, elementDeleteButton, elementImage);
 
   elementTitle.textContent = cardData.name;
   elementImage.src = cardData.link;
