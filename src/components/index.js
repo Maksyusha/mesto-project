@@ -1,71 +1,87 @@
 import '../pages/index.css';
 
-import {
-  buttonEdit,
-  buttonAdd,
-  avatarEditButton,
+
+
+const selectors = {
+  popupActive: 'popup_opened',
+}
+
+const avatarPopup = {
+  popup: document.querySelector('.popup_type_avatar'),
+  buttonHide: document.querySelector('.popup_type_avatar').querySelector('.popup__close-button'),
+  buttonShow: document.querySelector('.profile__avatar-edit-button'),
+}
+
+const profilePopup = {
+  popup: document.querySelector('.popup_type_profile'),
+  buttonHide: document.querySelector('.popup_type_profile').querySelector('.popup__close-button'),
+  buttonShow: document.querySelector('.profile__edit-button'),
+}
+
+const cardPopup = {
+  popup: document.querySelector('.popup_type_card'),
+  buttonHide: document.querySelector('.popup_type_card').querySelector('.popup__close-button'),
+  buttonShow: document.querySelector('.profile__add-button'),
+}
+
+const popupFormList = [
   avatarPopup,
-  avatarForm,
   profilePopup,
-  profileForm,
-  cardPopup,
-  cardForm,
-  popupList,
-  selectors
-} from './utils.js';
+  cardPopup
+]
 
-import {renderElement} from './card.js';
+class Popup {
+  constructor(data, selectors) {
+    this.popup = data.popup;
+    this.buttonShow = data.buttonShow;
+    this.buttonHide = data.buttonHide;
+    this.selectorPopupActive = selectors.popupActive;
 
-import {
-  openPopup,
-  closePopup,
-  submitAvatarProfile,
-  submitProfilePopup,
-  submitCardPopup,
-} from './modal.js';
+    this.hidePopup = this.hidePopup.bind(this);
+    this.handleEscHide = this.handleEscHide.bind(this);
+    this.handleOverlayHide = this.handleOverlayHide.bind(this);
+  }
 
-import {enableValidation} from './validate.js';
-
-import {renderProfile} from './profile.js';
-
-import {getUserData, getCardsData} from './api.js';
-
-
-
-enableValidation(selectors);
-
-
-
-avatarEditButton.addEventListener('click', () => openPopup(avatarPopup))
-buttonEdit.addEventListener('click', () => openPopup(profilePopup));
-buttonAdd.addEventListener('click', () => openPopup(cardPopup));
-
-avatarForm.addEventListener('submit', submitAvatarProfile);
-profileForm.addEventListener('submit', submitProfilePopup);
-cardForm.addEventListener('submit', submitCardPopup);
-
-popupList.forEach((popup) => {
-
-  popup.addEventListener('mousedown', (evt) => {
-
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__container')) {
-      closePopup(popup)
+  handleOverlayHide(evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+      this.hidePopup()
     }
+  }
 
-    if (evt.target.classList.contains('popup__close-button')) {
-      closePopup(popup)
+  handleEscHide(evt) {
+    if (evt.key === 'Escape') {
+      this.hidePopup();
     }
-  });
-});
+  }
+
+  setEventListeners() {
+    this.buttonHide.addEventListener('click', this.hidePopup);
+    document.addEventListener('keydown', this.handleEscHide);
+    document.addEventListener('click', this.handleOverlayHide);
+  }
+
+  removeEventListeners() {
+    this.buttonHide.removeEventListener('click', this.hidePopup);
+    document.removeEventListener('keydown', this.handleEscHide);
+    document.removeEventListener('click', this.handleOverlayHide);
+  }
+
+  showPop() {
+    this.setEventListeners();
+    this.popup.classList.add(this.selectorPopupActive);
+  }
+
+  hidePopup() {
+    this.removeEventListeners();
+    this.popup.classList.remove(this.selectorPopupActive);
+  }
+}
 
 
 
-Promise.all([getCardsData(), getUserData()])
-  .then(([cardsData, userData]) => {
-    renderProfile(userData);
+popupFormList.forEach((item) => {
+  const popup = new Popup(item, selectors);
 
-    const userId = userData._id;
+  item.buttonShow.addEventListener('click', () => popup.showPop());
+})
 
-    cardsData.forEach((cardData) => renderElement(cardData, userId));
-  })
-  .catch((err) => console.log(err));
