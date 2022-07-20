@@ -1,7 +1,12 @@
 import '../pages/index.css';
+
 import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 import FormValidator from './FormValidator.js';
-import {config, selectors, popupFormList} from './utils.js';
+import {config, selectors, cardSelectors, popupFormList, imagePopup} from './utils.js';
+import Api from './api.js';
+import Card from './card';
+import { Section } from './Section.js';
 
 
 
@@ -11,7 +16,7 @@ popupFormList.forEach((item) => {
   item.buttonShow.addEventListener('click', () => popup.showPop());
 })
 
-
+const popupWithImage = new PopupWithImage(imagePopup, selectors);
 
 const formList = Array.from(document.querySelectorAll(`.${selectors.form}`));
 
@@ -25,36 +30,32 @@ formList.forEach((formElement) => {
   formValidator.setEventListners();
 })
 
+const api = new Api(config);
 
-
-class Api {
-  constructor(options) {
-    this.url = options.url;
-    this.headers = options.headers;
-  }
-
-  onResponse(res) {
-    return res.ok ? res.json() : Promise.reject(res.status);
-  }
-
-  getUserData() {
-    return fetch(`${this.url}users/me`, {
-      method: 'GET',
-      headers: this.headers
-    })
-    .then((res) => this.onResponse(res))
-  }
-
-  getCardsData() {
-    return fetch(`${this.url}cards`, {
-      method: 'GET',
-      headers: this.headers
-    })
-    .then((res) => onResponse(res))
-  }
-}
-
-const api = new Api(config)
-
-console.log(api.getUserData());
 console.log(api.getCardsData());
+
+
+
+
+
+
+
+Promise.all([api.getCardsData(), api.getUserData()])
+  .then(([cardsData, userData]) => {
+    // renderProfile(userData);
+
+    const userId = userData._id;
+
+    const renderCards = new Section({
+      renderer: (cardData) => {
+        const card = new Card(cardData, cardSelectors, userId, api, popupWithImage)
+        const element = card.createElement();
+        renderCards.addElement(element);
+      }
+    }, cardsData, cardSelectors.container);
+
+    renderCards.render();
+  })
+  .catch((err) => console.log(err));
+
+

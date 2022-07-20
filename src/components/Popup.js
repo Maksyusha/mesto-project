@@ -1,7 +1,6 @@
 export default class Popup {
   constructor(data, selectors) {
     this.popup = data.popup;
-    this.buttonShow = data.buttonShow;
     this.buttonHide = data.buttonHide;
     this.selectorPopupActive = selectors.popupActive;
 

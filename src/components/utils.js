@@ -15,6 +15,18 @@ const selectors = {
   popupActive: 'popup_opened',
 }
 
+const cardSelectors = {
+  container: '.elements',
+  template: '.element-template',
+  element: '.element',
+  title: '.element__title',
+  image: '.element__image',
+  likeButton: '.element__like-button',
+  likeButtonActive: 'element__like-button_active',
+  likeCount: '.element__like-count',
+  deleteButton: '.element__delete-button'
+}
+
 const avatarPopup = {
   popup: document.querySelector('.popup_type_avatar'),
   buttonHide: document.querySelector('.popup_type_avatar').querySelector('.popup__close-button'),
@@ -39,10 +51,19 @@ const popupFormList = [
   cardPopup
 ]
 
+const imagePopup = {
+  popup: document.querySelector('.popup_type_image'),
+  title: document.querySelector('.popup__figcaption'),
+  image: document.querySelector('.popup__image'),
+  buttonHide: document.querySelector('.popup_type_image').querySelector('.popup__close-button'),
+}
+
 
 
 export {
   config,
   selectors,
-  popupFormList
+  cardSelectors,
+  popupFormList,
+  imagePopup
 }
