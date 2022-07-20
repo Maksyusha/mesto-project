@@ -1,71 +1,60 @@
 import '../pages/index.css';
-
-import {
-  buttonEdit,
-  buttonAdd,
-  avatarEditButton,
-  avatarPopup,
-  avatarForm,
-  profilePopup,
-  profileForm,
-  cardPopup,
-  cardForm,
-  popupList,
-  selectors
-} from './utils.js';
-
-import {renderElement} from './card.js';
-
-import {
-  openPopup,
-  closePopup,
-  submitAvatarProfile,
-  submitProfilePopup,
-  submitCardPopup,
-} from './modal.js';
-
-import {enableValidation} from './validate.js';
-
-import {renderProfile} from './profile.js';
-
-import {getUserData, getCardsData} from './api.js';
+import Popup from './Popup.js';
+import FormValidator from './FormValidator.js';
+import {config, selectors, popupFormList} from './utils.js';
 
 
 
-enableValidation(selectors);
+popupFormList.forEach((item) => {
+  const popup = new Popup(item, selectors);
+
+  item.buttonShow.addEventListener('click', () => popup.showPop());
+})
 
 
 
-avatarEditButton.addEventListener('click', () => openPopup(avatarPopup))
-buttonEdit.addEventListener('click', () => openPopup(profilePopup));
-buttonAdd.addEventListener('click', () => openPopup(cardPopup));
+const formList = Array.from(document.querySelectorAll(`.${selectors.form}`));
 
-avatarForm.addEventListener('submit', submitAvatarProfile);
-profileForm.addEventListener('submit', submitProfilePopup);
-cardForm.addEventListener('submit', submitCardPopup);
-
-popupList.forEach((popup) => {
-
-  popup.addEventListener('mousedown', (evt) => {
-
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__container')) {
-      closePopup(popup)
-    }
-
-    if (evt.target.classList.contains('popup__close-button')) {
-      closePopup(popup)
-    }
+formList.forEach((formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
   });
-});
+
+  const formValidator = new FormValidator(selectors, formElement);
+
+  formValidator.setEventListners();
+})
 
 
 
-Promise.all([getCardsData(), getUserData()])
-  .then(([cardsData, userData]) => {
-    renderProfile(userData);
+class Api {
+  constructor(options) {
+    this.url = options.url;
+    this.headers = options.headers;
+  }
 
-    const userId = userData._id;
+  onResponse(res) {
+    return res.ok ? res.json() : Promise.reject(res.status);
+  }
 
-    cardsData.forEach((cardData) => renderElement(cardData, userId));
-  })
-  .catch((err) => console.log(err));
+  getUserData() {
+    return fetch(`${this.url}users/me`, {
+      method: 'GET',
+      headers: this.headers
+    })
+    .then((res) => this.onResponse(res))
+  }
+
+  getCardsData() {
+    return fetch(`${this.url}cards`, {
+      method: 'GET',
+      headers: this.headers
+    })
+    .then((res) => onResponse(res))
+  }
+}
+
+const api = new Api(config)
+
+console.log(api.getUserData());
+console.log(api.getCardsData());
