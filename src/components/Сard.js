@@ -1,5 +1,3 @@
-import Api from "./api";
-
 export default class Card {
   constructor (data, selectors, userId, api, popupWithImage) {
     this._title = data.name;
@@ -10,7 +8,6 @@ export default class Card {
     this._userId = userId;
     this._api = api;
     this._popupWithImage = popupWithImage;
-    this._popup = popupWithImage;
 
     this._templateSelector = selectors.template;
     this._elementSelector = selectors.element;
@@ -85,12 +82,10 @@ export default class Card {
     .catch((err) => console.log(err));
   }
 
-
-
   _setEventListener(element, likeButton, likeCounter, deleteButton, image) {
     likeButton.addEventListener('click', () => this._checkLike(likeButton, likeCounter));
     deleteButton.addEventListener('click', () => this._deleteElement(element));
-    image.addEventListener('click', () => this._popup.render(this._title, this._url));
+    image.addEventListener('click', () => this._popupWithImage.showPopup(this._title, this._url));
   }
 
 }

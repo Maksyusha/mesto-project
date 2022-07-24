@@ -4,8 +4,8 @@ import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
 import FormValidator from './FormValidator.js';
 import {config, selectors, cardSelectors, popupFormList, imagePopup} from './utils.js';
-import Api from './api.js';
-import Card from './card';
+import Api from './Api.js';
+import Card from './Сard.js';
 import { Section } from './Section.js';
 
 
@@ -13,10 +13,8 @@ import { Section } from './Section.js';
 popupFormList.forEach((item) => {
   const popup = new Popup(item, selectors);
 
-  item.buttonShow.addEventListener('click', () => popup.showPop());
+  item.buttonShow.addEventListener('click', () => popup.showPopup());
 })
-
-const popupWithImage = new PopupWithImage(imagePopup, selectors);
 
 const formList = Array.from(document.querySelectorAll(`.${selectors.form}`));
 
@@ -32,7 +30,7 @@ formList.forEach((formElement) => {
 
 const api = new Api(config);
 
-console.log(api.getCardsData());
+const popupWithImage = new PopupWithImage(imagePopup, selectors);
 
 
 
@@ -50,9 +48,10 @@ Promise.all([api.getCardsData(), api.getUserData()])
       renderer: (cardData) => {
         const card = new Card(cardData, cardSelectors, userId, api, popupWithImage)
         const element = card.createElement();
-        renderCards.addElement(element);
-      }
-    }, cardsData, cardSelectors.container);
+        renderCards.addItem(element);
+      },
+      data: cardsData
+    }, cardSelectors.container);
 
     renderCards.render();
   })

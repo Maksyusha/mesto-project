@@ -24,16 +24,16 @@ export default class Popup {
   setEventListeners() {
     this.buttonHide.addEventListener('click', this.hidePopup);
     document.addEventListener('keydown', this.handleEscHide);
-    document.addEventListener('click', this.handleOverlayHide);
+    document.addEventListener('mousedown', this.handleOverlayHide);
   }
 
   removeEventListeners() {
     this.buttonHide.removeEventListener('click', this.hidePopup);
     document.removeEventListener('keydown', this.handleEscHide);
-    document.removeEventListener('click', this.handleOverlayHide);
+    document.removeEventListener('mousedown', this.handleOverlayHide);
   }
 
-  showPop() {
+  showPopup() {
     this.setEventListeners();
     this.popup.classList.add(this.selectorPopupActive);
   }
