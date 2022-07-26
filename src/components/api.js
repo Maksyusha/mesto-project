@@ -35,7 +35,7 @@ export default class Api {
 
   editUserData(data) {
     return fetch(`${this.url}users/me`, {
-      method: 'PATH',
+      method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify(data)
     })
@@ -44,7 +44,7 @@ export default class Api {
 
   editUserAvatar(data) {
     return fetch(`${this.url}users/me/avatar`, {
-      method: 'PATH',
+      method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify(data)
     })

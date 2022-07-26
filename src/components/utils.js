@@ -27,6 +27,12 @@ const cardSelectors = {
   deleteButton: '.element__delete-button'
 }
 
+const userSelectors = {
+  name: '.profile__name',
+  about: '.profile__about',
+  avatar: '.profile__avatar'
+}
+
 const avatarPopup = {
   popup: document.querySelector('.popup_type_avatar'),
   buttonHide: document.querySelector('.popup_type_avatar').querySelector('.popup__close-button'),
@@ -64,6 +70,10 @@ export {
   config,
   selectors,
   cardSelectors,
+  userSelectors,
+  avatarPopup,
+  profilePopup,
+  cardPopup,
   popupFormList,
   imagePopup
 }
