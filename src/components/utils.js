@@ -1,36 +1,10 @@
-const elementsContainer = document.querySelector('.elements');
-const elementTemplate = document.querySelector('.element-template').content;
-
-const userName = document.querySelector('.profile__name');
-const userAbout = document.querySelector('.profile__about');
-const userAvatar = document.querySelector('.profile__avatar');
-
-const buttonEdit = document.querySelector('.profile__edit-button');
-const buttonAdd = document.querySelector('.profile__add-button');
-
-const avatarEditButton = document.querySelector('.profile__avatar-edit-button')
-const avatarPopup = document.querySelector('.popup_type_avatar');
-const avatarForm = avatarPopup.querySelector('.popup__form');
-const avatarInput = avatarPopup.querySelector('.popup__item_el_avatar');
-const avatarButtonSubmit = avatarPopup.querySelector('.popup__submit-button');
-
-const profilePopup = document.querySelector('.popup_type_profile');
-const profileForm = profilePopup.querySelector('.popup__form');
-const profileName = profilePopup.querySelector('.popup__item_el_name');
-const profileAbout = profilePopup.querySelector('.popup__item_el_about');
-const profileButtonSubmit = profilePopup.querySelector('.popup__submit-button');
-
-const cardPopup = document.querySelector('.popup_type_card');
-const cardForm = cardPopup.querySelector('.popup__form');
-const cardTitle = cardPopup.querySelector('.popup__item_el_title');
-const cardLink = cardPopup.querySelector('.popup__item_el_link');
-const cardButtonSubmit = cardPopup.querySelector('.popup__submit-button');
-
-const imagePopup = document.querySelector('.popup_type_image');
-const imagePicture = imagePopup.querySelector('.popup__image');
-const imageFigcaption = imagePopup.querySelector('.popup__figcaption');
-
-const popupList = Array.from(document.querySelectorAll('.popup'));
+const config = {
+  url: 'https://nomoreparties.co/v1/plus-cohort-13/',
+  headers: {
+    authorization: '2dd7389d-c9b9-45d3-bbd5-6f3fcf495c19',
+    'Content-type': 'application/json'
+  }
+}
 
 const selectors = {
   form: 'popup__form',
@@ -38,37 +12,67 @@ const selectors = {
   submitButtonInactive: 'popup__submit-button_inactive',
   input: 'popup__item',
   inputError: 'popup__item_type_error',
+  popupActive: 'popup_opened',
+}
+
+const cardSelectors = {
+  container: '.elements',
+  template: '.element-template',
+  element: '.element',
+  title: '.element__title',
+  image: '.element__image',
+  likeButton: '.element__like-button',
+  likeButtonActive: 'element__like-button_active',
+  likeCount: '.element__like-count',
+  deleteButton: '.element__delete-button'
+}
+
+const userSelectors = {
+  name: '.profile__name',
+  about: '.profile__about',
+  avatar: '.profile__avatar'
+}
+
+const avatarPopup = {
+  popup: document.querySelector('.popup_type_avatar'),
+  buttonHide: document.querySelector('.popup_type_avatar').querySelector('.popup__close-button'),
+  buttonShow: document.querySelector('.profile__avatar-edit-button'),
+}
+
+const profilePopup = {
+  popup: document.querySelector('.popup_type_profile'),
+  buttonHide: document.querySelector('.popup_type_profile').querySelector('.popup__close-button'),
+  buttonShow: document.querySelector('.profile__edit-button'),
+}
+
+const cardPopup = {
+  popup: document.querySelector('.popup_type_card'),
+  buttonHide: document.querySelector('.popup_type_card').querySelector('.popup__close-button'),
+  buttonShow: document.querySelector('.profile__add-button'),
+}
+
+const popupFormList = [
+  avatarPopup,
+  profilePopup,
+  cardPopup
+]
+
+const imagePopup = {
+  popup: document.querySelector('.popup_type_image'),
+  title: document.querySelector('.popup__figcaption'),
+  image: document.querySelector('.popup__image'),
+  buttonHide: document.querySelector('.popup_type_image').querySelector('.popup__close-button'),
 }
 
 
-
-
 export {
-  elementsContainer,
-  elementTemplate,
-  userName,
-  userAbout,
-  userAvatar,
-  buttonEdit,
-  buttonAdd,
-  avatarEditButton,
+  config,
+  selectors,
+  cardSelectors,
+  userSelectors,
   avatarPopup,
-  avatarForm,
-  avatarInput,
-  avatarButtonSubmit,
   profilePopup,
-  profileForm,
-  profileName,
-  profileAbout,
-  profileButtonSubmit,
   cardPopup,
-  cardForm,
-  cardTitle,
-  cardLink,
-  cardButtonSubmit,
+  popupFormList,
   imagePopup,
-  imagePicture,
-  imageFigcaption,
-  popupList,
-  selectors
-};
+}
