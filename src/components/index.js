@@ -1,6 +1,5 @@
 import "../pages/index.css";
 
-import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import FormValidator from "./FormValidator.js";
@@ -13,7 +12,6 @@ import {
   avatarPopup,
   profilePopup,
   cardPopup,
-  popupFormList,
   imagePopup,
 } from "./utils.js";
 import Api from "./Api.js";
@@ -54,12 +52,15 @@ formList.forEach((formElement) => {
 
 
 const popupWithAvatar = new PopupWithForm(avatarPopup, selectors, (data) => {
+  popupWithCard.renderLoading(true);
+
   api
     .editUserAvatar(data)
     .then((data) => {
       userInfo.setUserInfo(data);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(popupWithCard.renderLoading(false));
 });
 
 avatarPopup.buttonShow.addEventListener("click", () => {
@@ -69,12 +70,15 @@ avatarPopup.buttonShow.addEventListener("click", () => {
 
 
 const popupWithProfile = new PopupWithForm(profilePopup, selectors, (data) => {
+  popupWithCard.renderLoading(true);
+
   api
     .editUserData(data)
     .then((data) => {
       userInfo.setUserInfo(data);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => popupWithCard.renderLoading(false));
 });
 
 profilePopup.buttonShow.addEventListener("click", () => {
@@ -85,6 +89,8 @@ profilePopup.buttonShow.addEventListener("click", () => {
 
 
 const popupWithCard = new PopupWithForm(cardPopup, selectors, (data) => {
+  popupWithCard.renderLoading(true);
+
   api
     .addCard(data)
     .then((data) => {
@@ -98,7 +104,8 @@ const popupWithCard = new PopupWithForm(cardPopup, selectors, (data) => {
 
       renderCard.addItem(createCard(data, userId));
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(popupWithCard.renderLoading(false));
 });
 
 cardPopup.buttonShow.addEventListener("click", () => {

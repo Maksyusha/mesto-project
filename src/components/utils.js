@@ -51,12 +51,6 @@ const cardPopup = {
   buttonShow: document.querySelector('.profile__add-button'),
 }
 
-const popupFormList = [
-  avatarPopup,
-  profilePopup,
-  cardPopup
-]
-
 const imagePopup = {
   popup: document.querySelector('.popup_type_image'),
   title: document.querySelector('.popup__figcaption'),
@@ -73,6 +67,5 @@ export {
   avatarPopup,
   profilePopup,
   cardPopup,
-  popupFormList,
   imagePopup,
 }
