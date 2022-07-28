@@ -65,7 +65,6 @@ const imagePopup = {
 }
 
 
-
 export {
   config,
   selectors,
@@ -75,5 +74,5 @@ export {
   profilePopup,
   cardPopup,
   popupFormList,
-  imagePopup
+  imagePopup,
 }

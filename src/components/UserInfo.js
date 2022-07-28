@@ -11,6 +11,7 @@ export default class UserInfo {
     this._avatar.src = data.avatar;
   }
 
+
   getUserData() {
     const userData = {
       name: this._name.textContent,

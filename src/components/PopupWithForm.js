@@ -4,15 +4,11 @@ export default class PopupWithForm extends Popup {
   constructor(data, selectors, submitCallBack) {
     super(data, selectors);
     this._submitCallBack = submitCallBack;
-    this._form = document
-      .querySelector(".popup_type_profile")
-      .querySelector(".popup__form");
-    this._inputList = document
-      .querySelector(".popup_type_profile")
-      .querySelectorAll(".popup__item");
+    this._form = this._popup.querySelector(".popup__form");
+    this._inputList = this._popup.querySelectorAll(".popup__item");
     this._submit = () => {
       this._submitCallBack(this._getInputValues());
-      this._hidePopup();
+      this.hidePopup();
     };
   }
 
@@ -26,7 +22,7 @@ export default class PopupWithForm extends Popup {
     super.removeEventListeners();
   }
 
-  _hidePopup() {
+  hidePopup() {
     this._form.reset();
     super.hidePopup();
   }
@@ -43,7 +39,7 @@ export default class PopupWithForm extends Popup {
     this._inputList.forEach((input) => {
       values[input.name] = input.value;
     });
-    console.log(values);
+
     return values;
   }
 }

@@ -1,45 +1,45 @@
 export default class Popup {
   constructor(data, selectors) {
-    this.popup = data.popup;
-    this.buttonHide = data.buttonHide;
-    this.selectorPopupActive = selectors.popupActive;
+    this._popup = data.popup;
+    this._buttonHide = data.buttonHide;
+    this._selectorPopupActive = selectors.popupActive;
 
     this.hidePopup = this.hidePopup.bind(this);
-    this.handleEscHide = this.handleEscHide.bind(this);
-    this.handleOverlayHide = this.handleOverlayHide.bind(this);
+    this._handleEscHide = this._handleEscHide.bind(this);
+    this._handleOverlayHide = this._handleOverlayHide.bind(this);
   }
 
-  handleOverlayHide(evt) {
-    if (evt.target.classList.contains('popup_opened')) {
-      this.hidePopup()
+  _handleOverlayHide(evt) {
+    if (evt.target.classList.contains(this._selectorPopupActive)) {
+      this.hidePopup();
     }
   }
 
-  handleEscHide(evt) {
-    if (evt.key === 'Escape') {
+  _handleEscHide(evt) {
+    if (evt.key === "Escape") {
       this.hidePopup();
     }
   }
 
   setEventListeners() {
-    this.buttonHide.addEventListener('click', this.hidePopup);
-    document.addEventListener('keydown', this.handleEscHide);
-    document.addEventListener('mousedown', this.handleOverlayHide);
+    this._buttonHide.addEventListener("click", this.hidePopup);
+    document.addEventListener("keydown", this._handleEscHide);
+    document.addEventListener("mousedown", this._handleOverlayHide);
   }
 
   removeEventListeners() {
-    this.buttonHide.removeEventListener('click', this.hidePopup);
-    document.removeEventListener('keydown', this.handleEscHide);
-    document.removeEventListener('mousedown', this.handleOverlayHide);
+    this._buttonHide.removeEventListener("click", this.hidePopup);
+    document.removeEventListener("keydown", this._handleEscHide);
+    document.removeEventListener("mousedown", this._handleOverlayHide);
   }
 
   showPopup() {
     this.setEventListeners();
-    this.popup.classList.add(this.selectorPopupActive);
+    this._popup.classList.add(this._selectorPopupActive);
   }
 
   hidePopup() {
     this.removeEventListeners();
-    this.popup.classList.remove(this.selectorPopupActive);
+    this._popup.classList.remove(this._selectorPopupActive);
   }
 }
