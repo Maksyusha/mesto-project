@@ -28,9 +28,34 @@ const userInfo = new UserInfo(userSelectors);
 
 let userId;
 
+let section;
+
+
+
 function createCard(cardData, userId) {
-  const card = new Card(cardSelectors, api, popupWithImage);
-  const element = card.createElement(cardData, userId);
+  const card = new Card(cardSelectors, cardData, userId, popupWithImage, {
+    handleLike: () => {
+      if (card.checkLike()) {
+        api
+          .deleteLike(card.getId())
+          .then((data) => card.dislikeElement(data))
+          .catch((err) => console.log(err));
+      } else {
+        api
+          .putLike(card.getId())
+          .then((data) => card.likeElement(data))
+          .catch((err) => console.log(err));
+      }
+    },
+    handleDelete: () => {
+      api
+        .deleteCard(card.getId())
+        .then(card.deleteElement())
+        .catch((err) => console.log(err));
+    }
+  });
+
+  const element = card.createElement();
 
   return element;
 }
@@ -58,6 +83,7 @@ const popupWithAvatar = new PopupWithForm(avatarPopup, selectors, (data) => {
     .editUserAvatar(data)
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupWithAvatar.hidePopup();
     })
     .catch((err) => console.log(err))
     .finally(popupWithCard.renderLoading(false));
@@ -76,6 +102,7 @@ const popupWithProfile = new PopupWithForm(profilePopup, selectors, (data) => {
     .editUserData(data)
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupWithProfile.hidePopup();
     })
     .catch((err) => console.log(err))
     .finally(() => popupWithCard.renderLoading(false));
@@ -94,15 +121,8 @@ const popupWithCard = new PopupWithForm(cardPopup, selectors, (data) => {
   api
     .addCard(data)
     .then((data) => {
-      const renderCard = new Section(
-        {
-          renderer: () => {},
-          cardData: data,
-        },
-        cardSelectors.container
-      );
-
-      renderCard.addItem(createCard(data, userId));
+      section.addItem(createCard(data, userId));
+      popupWithCard.hidePopup();
     })
     .catch((err) => console.log(err))
     .finally(popupWithCard.renderLoading(false));
@@ -120,16 +140,16 @@ Promise.all([api.getCardsData(), api.getUserData()])
 
     userId = userData._id;
 
-    const renderCards = new Section(
+    section = new Section(
       {
         renderer: (cardData) => {
-          renderCards.addItem(createCard(cardData, userId));
+          section.addItem(createCard(cardData, userId));
         },
         data: cardsData,
       },
       cardSelectors.container
     );
 
-    renderCards.render();
+    section.render();
   })
   .catch((err) => console.log(err));

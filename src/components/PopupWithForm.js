@@ -9,7 +9,6 @@ export default class PopupWithForm extends Popup {
     this._buttonSubmit = this._popup.querySelector(`.${selectors.submitButton}`)
     this._submit = () => {
       this._submitCallBack(this._getInputValues());
-      this.hidePopup();
     };
   }
 
